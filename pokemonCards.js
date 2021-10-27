@@ -12,8 +12,8 @@
  * 
  */
 
-const rarityRandomizer = () => Math.ceil(Math.random() * 100)
-const cardTypeRandomizer = (cards) => Math.ceil(Math.random() * cards)
+const randomizer = (cards = 100) => Math.ceil(Math.random() * cards)
+// const cardTypeRandomizer = (cards) => Math.ceil(Math.random() * cards)
 
 // return card's rarity
 function rarityLevel(num) {
@@ -24,31 +24,35 @@ function rarityLevel(num) {
 }
 
 // return card's type after getting its rarity
-function cardType(rarity) {
+function cardNumber(rarity) {
     switch (rarity) {
         case "common":
-            return cardTypeRandomizer(94)
+            return randomizer(94)
         case "rare":
-            return cardTypeRandomizer(81)
+            return randomizer(81)
         case "epic":
-            return cardTypeRandomizer(37)
+            return randomizer(37)
         case "legendary":
-            return cardTypeRandomizer(33)
+            return randomizer(33)
     }
 }
 
+// main function
 function roll(times = 5) {
     let cardList = []
 
     for (let i = 0; i < times; i++) {
-        let rarityRoll = rarityLevel(rarityRandomizer())
-        let cardRoll = cardType(rarityRoll)
+        let rarityRoll = rarityLevel(randomizer())
+        let cardRoll = cardNumber(rarityRoll)
 
-        cardList.push({"rarity": rarityRoll, "card type": cardRoll})
+        cardList.push({"rarity": rarityRoll, "card number": cardRoll})
+
     }
 
     console.table(cardList)
 }
 
 // test main function
-roll(10)
+// roll(100)
+
+module.exports = { cardNumber, rarityLevel, randomizer }
